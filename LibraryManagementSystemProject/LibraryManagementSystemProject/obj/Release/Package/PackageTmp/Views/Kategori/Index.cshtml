@@ -1,0 +1,37 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLKATEGORİ>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color: #620e45">KATEGORİLER</h2>
+
+<a href="/Kategori/KategoriEkle/" class="btn btn-default" style="color:#620e45; background-color: #BC8F8F ">Kategori Ekle</a>
+<br />
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color:#e8bbbb">
+        <th style="color: #620e45">ID</th>
+        <th style="color: #620e45">KATEGORİ AD</th>
+        <th style="color: #620e45">SİL</th>
+        <th style="color: #620e45">GÜNCELLE</th>
+
+    </tr>
+    @foreach (var ktg in Model)
+    {
+        <tr>
+            <td>@ktg.ID</td>
+            <td>@ktg.AD</td>
+            <td>@Html.ActionLink("SİL", "KategoriSil", new { id = ktg.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinize emin misiniz?')" }) </td>
+            @*<td><a href="/Kategori/KategoriSil/@ktg.ID"class="btn btn-danger">SİL</a></td>*@
+            <td><a href="/Kategori/KategoriGetir/@ktg.ID" class="btn btn-default" style="color: #620e45; background-color:#ccf2ff ">GÜNCELLE</a></td>
+
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

@@ -1,0 +1,36 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLPERSONEL>
+@*@model List<TBLPERSONEL>*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>PERSONELLER</h2>
+<br />
+
+<table class="table table-striped">
+    <tr style="background-color:#fff7dc">
+        <th>PERSONEL ID</th>
+        <th>PERSONEL AD</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+
+    </tr>
+    @foreach (var prsn in Model)
+    {
+        <tr>
+            <td>@prsn.ID</td>
+            <td>@prsn.PERSONEL</td>
+            <td>@Html.ActionLink("SİL", "PersonelSil", new { id = prsn.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinize emin misiniz?')" }) </td>
+            <td><a href="/Personel/PersonelGetir/@prsn.ID" class="btn btn-success">GÜNCELLE</a></td>
+
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+<a href="/Personel/PersonelEkle/" class="btn btn-primary">Personel Ekle</a>
+

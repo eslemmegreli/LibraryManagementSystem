@@ -1,0 +1,37 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLYAZAR>
+@*@model List<TBLYAZAR>*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>YAZARLAR</h2>
+<a class="btn btn-primary" href="/Yazar/YazarEkle/">Yeni Yazar Ekle</a>
+<div style="margin-bottom:15px; margin-top:15px"></div>
+<table class="table table-striped">
+    <tr style="background-color:#defff3" >
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>DETAY</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+        <th>KİTAPLARI</th>
+    </tr>
+    @foreach (var y in Model)
+    {
+        <tr>
+            <td>@y.ID</td>
+            <td>@y.AD</td>
+            <td>@y.SOYAD</td>
+            <td>@y.DETAY</td>
+            <td>@Html.ActionLink("SİL", "YazarSil", new { id = y.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinize emin misiniz?')" }) </td>
+            <td><a href="/Yazar/YazarGetir/@y.ID" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Yazar/YazarKitaplar/@y.ID" class="btn btn-group" style="background-color:lightsteelblue">İncele</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

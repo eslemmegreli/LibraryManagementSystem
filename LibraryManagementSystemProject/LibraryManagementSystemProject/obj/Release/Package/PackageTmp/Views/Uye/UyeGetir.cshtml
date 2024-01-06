@@ -1,0 +1,42 @@
+﻿@model LibraryManagementSystemProject.Models.Entity.TBLUYELER
+@{
+    ViewBag.Title = "UyeGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("UyeGuncelle", "Uye", FormMethod.Post))
+{
+    <div style="margin-bottom:15px"></div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.ID)
+        @Html.TextBoxFor(u => u.ID, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Üye Adı:</label>
+        @Html.TextBoxFor(u => u.AD, new { @class = "form-control" })
+        <br />
+        <label>Üye Soyadı:</label>
+        @Html.TextBoxFor(u => u.SOYAD, new { @class = "form-control" })
+        <br />
+        <label>Mail:</label>
+        @Html.TextBoxFor(u => u.MAIL, new { @class = "form-control" })
+        <br />
+        <label>Kullanıcı Adı:</label>
+        @Html.TextBoxFor(u => u.KULLANICIADI, new { @class = "form-control" })
+        <br />
+        <label>Şifre:</label>
+        @Html.TextBoxFor(u => u.SİFRE, new { @class = "form-control" })
+        <br />
+        <label>Telefon no:</label>
+        @Html.TextBoxFor(u => u.TELEFON, new { @class = "form-control" })
+    <br />
+        <label>Okul:</label>
+        @Html.TextBoxFor(u => u.OKUL, new { @class = "form-control" })
+    <br />
+        <label>Fotoğraf Link:</label>
+        @Html.TextBoxFor(u => u.FOTOGRAF, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-warning">Güncelle</button>
+    </div>
+}
+

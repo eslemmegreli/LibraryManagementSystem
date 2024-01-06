@@ -1,0 +1,57 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@model List<TBLKITAP>
+
+@*@model PagedList.IPagedList<TBLKITAP>*@
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>    KİTAP SAYFASI   </h2>
+
+@using (Html.BeginForm("Index", "Kitap", FormMethod.Get))
+{
+    <div style="margin-bottom:15px; margin-top:15px;">
+        <b>Aranacak Kitap Adını Girin: &nbsp</b>@Html.TextBox("p")
+        <input type="submit" value="Ara" />
+
+    </div>
+}
+<a href="/Kitap/KitapEkle" class="btn btn-primary">Yeni Kitap Ekle</a> 
+<br />
+<br />
+
+
+<table class="table table-striped">
+
+    <tr style="background-color:#fee2ff">
+        <th>ID</th>
+        <th>KİTAP ADI</th>
+        <th>YAZAR</th>
+        <th>KATEGORİ</th>
+        <th>BASIM YILI</th>
+        <th>YAYINEVİ</th>
+        <th>SAYFA SAYISI</th>
+        <th>DURUM</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.ID</td>
+            <td>@k.AD</td>
+            <td>@k.TBLYAZAR.AD &nbsp @k.TBLYAZAR.SOYAD</td>
+            <td>@k.TBLKATEGORİ.AD</td>
+            <td>@k.BASIMYIL</td>
+            <td>@k.YAYINEVI</td>
+            <td>@k.SAYFA</td>
+            <td>@k.DURUM</td>
+            <td>@Html.ActionLink("SİL", "KitapSil", new { id = k.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinize emin misiniz?')" }) </td>
+            <td><a href="/Kitap/KitapGetir/@k.ID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+
+</table>

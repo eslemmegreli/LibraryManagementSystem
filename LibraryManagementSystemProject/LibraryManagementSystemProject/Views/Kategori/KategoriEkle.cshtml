@@ -1,0 +1,19 @@
+﻿@model LibraryManagementSystemProject.Models.Entity.TBLKATEGORİ
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div style="margin-top:15px">
+        <label>Kategori Adı</label>
+        @*<input type="text" class="form-control" name="AD" />*@
+        @Html.TextBoxFor(y => y.AD, new { @class = "form-control" })
+        @Html.ValidationMessageFor(y => y.AD)
+    </div>
+    <div style="margin-top:25px">
+        <button class="btn btn-info" id="Btn1">KATEGORİ EKLE</button>
+    </div>
+    <input type="hidden" name="DURUM" value="True" />
+</form>
+

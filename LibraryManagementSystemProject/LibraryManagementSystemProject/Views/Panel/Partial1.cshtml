@@ -1,0 +1,41 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@model List<TBLDUYURULAR>
+
+@{ string renk = "";}
+@foreach (var x in Model)
+{
+    if (x.KATEGORI == "Yeni Kitap")      // eğer kategori değeri yeni kitapsa renk ata
+    {
+        renk = "#FF66CC";
+    }
+    if (x.KATEGORI == "İletişim")
+    {
+        renk = "#9370D8";
+    }
+    if (x.KATEGORI == "Gecikme")
+    {
+        renk = "#FF6633	";
+    }
+    if (x.KATEGORI == "Diğer")
+    {
+        renk = "#00CCFF";
+    }
+  
+    <div class="post">
+        <div class="user-block">
+            <img class="img-circle img-bordered-sm" src="~/AdminLTE-3.0.4/dist/img/3.png" alt="user image">
+            <span class="username">
+                <a href="#" style="color:@renk">@x.KATEGORI</a>  
+            </span>
+
+            <span class="description">@x.TARIH.ToString()</span>   @*duyuruların tarihlerini getirir*@
+
+        </div>
+        <p>
+
+            @x.ICERIK                                              @*duyuruların içeriklerini getirir*@
+
+        </p>
+
+    </div>
+}

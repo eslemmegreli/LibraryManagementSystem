@@ -1,0 +1,44 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLUYELER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>ÜYELER</h2>
+
+
+<table class="table table-striped">
+    <tr style="background-color:#cbe5ff">
+        <th>ÜYE ID</th>
+        <th>ÜYE ADI</th>
+        <th>ÜYE SOYADI</th>
+        <th>MAİL</th>
+        <th>OKUL</th>
+        <th>SİL</th>
+        <th>GÜNCELLE & DETAY</th>
+        <th>KİTAP GEÇMİŞİ</th>
+
+    </tr>
+    @foreach (var uye in Model)
+    {
+        <tr>
+            <td>@uye.ID</td>
+            <td>@uye.AD</td>
+            <td>@uye.SOYAD</td>
+            <td>@uye.MAIL</td>
+            <td>@uye.OKUL</td>
+            <td>@Html.ActionLink("SİL", "UyeSil", new { id = uye.ID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinize emin misiniz?')" }) </td>
+            <td><a href="/Uye/UyeGetir/@uye.ID" class="btn btn-success">    GÜNCELLE   </a></td>
+            <td><a href="/Uye/UyeKitapGecmis/@uye.ID" class="btn btn-success" style="background-color:lightseagreen">KİTAP GEÇMİŞİ</a></td>
+
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))  @* modelden gelecek değerleri sayfa içerisinde listele ve bu page adlı değişken değeri de her defasında bir url action alacak*@
+<a href="/Uye/UyeEkle/" class="btn btn-primary">Yeni Üye Ekle</a>
+
+

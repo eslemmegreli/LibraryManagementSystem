@@ -1,0 +1,35 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@model List<TBLHAREKET>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Ödünç Kitap Listesi</h2>
+
+<table class="table table-striped">
+
+    <tr style="background-color:#ecf1b9">
+        <th>İŞLEM ID</th>
+        <th>KİTAP ADI</th>
+        <th>ÜYE</th>
+        <th>PERSONEL</th>
+        <th>ALIŞ TARİHİ</th>
+        <th>İADE TARİHİ</th>
+        <th>İADE AL</th>
+       
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.ID</td>
+            <td>@k.TBLKITAP.AD</td>
+            <td>@k.TBLUYELER.AD &nbsp @k.TBLUYELER.SOYAD</td>
+            <td>@k.TBLPERSONEL.PERSONEL</td>
+            <td>@Convert.ToDateTime(k.ALISTARIH).ToString("dd/MM/yyyy")</td> @* stringe çevirmemdeki sebep tarihin gün ay yıl şeklinde gelmesini istemem,diğer türlü saatte gelir.*@
+            <td>@Convert.ToDateTime(k.IADETARIH).ToString("dd/MM/yyyy")</td>
+            <td><a href="/Odunc/OduncIade/@k.ID" class="btn btn-default" style="background-color:#c6ec97"  >Kitabı İade Al</a></td>
+        </tr>
+    }
+
+</table>

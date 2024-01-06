@@ -1,0 +1,69 @@
+﻿@using LibraryManagementSystemProject.Models.Entity
+@model List<TBLADMIN>
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<br />
+<link rel="stylesheet" href="/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kullanıcı</th>
+        <th>Yetki</th>
+        <th class="project-actions text-center">Düzenle</th>
+        <th class="project-actions text-center">Sil</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+
+
+        <tr>
+            <td>@x.ID</td>
+            <td>@x.Kullanici</td>
+            <td>@x.Yetki</td>
+            <td class="project-actions text-center">
+                <a class="btn btn-info btn-sm" href="/Ayarlar/AdminGuncelle/@x.ID">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Düzenle
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-danger btn-sm" href="/Ayarlar/AdminSil/@x.ID">
+                    <i class="fas fa-trash">
+                    </i>
+                    Sil
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<button class="btn btn-warning" data-toggle="modal" data-target="#Modal1"> Yeni Admin Ekle</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" style="text-align:center;color:purple">Admin Ekleme Paneli </h2>
+            </div>
+            <form method="post" action="/Ayarlar/YeniAdmin/">
+                <div class="modal-body">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" name="Kullanici" class="form-control" />
+                    <br />
+                    <label>Şifre</label>
+                    <input type="text" name="Sifre" class="form-control" />
+                    <br />
+                    <label>Yetki</label>
+                    <input type="text" name="Yetki" class="form-control" />
+                    <br />
+                    <button class="btn btn-info">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
